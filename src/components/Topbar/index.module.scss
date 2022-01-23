@@ -1,0 +1,20 @@
+@mixin Center {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+@mixin Postion {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+@mixin Size {
+    width: 20%;
+    height: 100%;
+}
+
+.right{
+    @include Postion();
+    @include Size();
+    @include Center();
+}

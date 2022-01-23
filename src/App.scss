@@ -1,0 +1,40 @@
+@import '~antd/dist/antd.css';
+@mixin CENTER {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.App{
+  width: 100vw;
+  height: 100vh;
+  background-color: #1890ff;
+}
+#components-layout-demo-custom-trigger {
+  .trigger {
+      padding: 0 24px;
+      font-size: 18px;
+      line-height: 64px;
+      cursor: pointer;
+      transition: color 0.3s;
+      &:hover{
+          color: #1890ff;
+      }
+  }
+  
+}
+.Logo {
+  height: 5vh;
+  margin: 16px 10%;
+  width: 80%;
+  background: rgba(245, 247, 248, 0.822);
+  @include CENTER()
+}
+section{
+  width: 100%;
+  height: 100%;
+}
+.site-layout{
+  .site-layout-background {
+      background: #fff;
+  }
+} 

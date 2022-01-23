@@ -1,0 +1,31 @@
+.but{
+    position: fixed;
+    width: 10vw;
+    background-color: rgba(44, 213, 255, 0.555);
+    border: none;
+    left: 45vw;
+
+}
+.girls{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    .girl{
+        
+    }
+}
+
+.list{
+    width: 70vw ;
+    height: 300px;
+    background-color: blue;
+    .lis{
+        background-color: white;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
+}
