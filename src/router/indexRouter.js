@@ -4,6 +4,7 @@ import Admin from '../views/admin';
 import NoPage from '../views/NoPage';
 
 
+
 const Indexrouter = () => {
     
     return (

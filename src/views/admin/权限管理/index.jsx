@@ -1,9 +1,12 @@
 
+import './index.scss'
 
 const 权限管理 = () => {
+    // const [hidden,sethidden] = useState(false)
+
     return (
-        <div>
-            权限管理
+        <div className="ps">
+          权限管理
         </div>
     );
 }

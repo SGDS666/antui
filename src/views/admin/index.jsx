@@ -10,8 +10,8 @@ import Home from './Home';
 import 发布管理 from './发布管理';
 import 权限管理 from './权限管理';
 import 审核管理 from './审核管理';
-import 新闻管理 from './新闻管理';
-import 用户管理 from './用户管理';
+import 新闻管理 from './文章上传';
+import 用户列表 from './用户列表';
 
 const {Content} = Layout
 const Admin = () => {
@@ -33,11 +33,11 @@ const Admin = () => {
                         <Route path='zs' element={<ZhangSen />}>
                             <Route path='demo' element={<Demo1 />} />
                         </Route>
-                        <Route path='send' element={<发布管理 />} />
-                        <Route path='power' element={<权限管理 />} />
-                        <Route path='examine' element={<审核管理 />} />
-                        <Route path='news' element={<新闻管理 />} />
-                        <Route path='user' element={<用户管理 />} />
+                        <Route path='news/release' element={<发布管理 />} />
+                        <Route path='user/power' element={<权限管理 />} />
+                        <Route path='news/examine' element={<审核管理 />} />
+                        <Route path='news/upload' element={<新闻管理 />} />
+                        <Route path='user/list' element={<用户列表 />} />
                         <Route path='/' element={<Home />} />
                     </Routes>
                 </Content>

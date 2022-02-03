@@ -1,49 +1,70 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 import {
     UserOutlined,
-    UploadOutlined,
-    ContactsOutlined,
-    ContainerOutlined,
-    AuditOutlined,
-    GithubOutlined,
-    RollbackOutlined,
 } from '@ant-design/icons';
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { sidehidden } from "../../Store";
 import './index.scss'
+import { useEffect, useState } from "react";
 
-const {  Sider} = Layout;
+const { Sider } = Layout;
+const { SubMenu } = Menu;
+
+const defaultIcon =  <UserOutlined/>
 
 const Sidebar = () => {
+    const [Menus,setMenu] = useState([])
+    const ishidden = useRecoilValue(sidehidden)
+    const navigate = useNavigate()
+    // console.log({navigate});
+    useEffect(()=>{
+        axios.get('http://localhost:8000/sider')
+        .then((v)=>{
+            const {data} = v
+            setMenu(data)
+            // console.log(v);
+        },(r)=>{
+            console.warn(r);
+        })
+    },[])
+
+
+    function renderMenu(menus = []) {
+        return (
+            menus.map(item => {
+                const { key, title, icon, children, jurisdiction } = item;
+                if (children) {
+                    return (
+                        <SubMenu key={key} icon={icon ?? defaultIcon} title={title}>
+                            {renderMenu(children)}
+                        </SubMenu>
+                    );
+                }
+                if (jurisdiction) {
+                    return (
+                        <Menu.Item
+                            key={key}
+                            icon={icon ?? defaultIcon}
+                            onClick={() => { navigate(key); } }
+                        >
+                            {title}
+                        </Menu.Item>
+                    );
+                }
+                return undefined
+
+
+
+            })
+        );
+    }
     return (
-        <Sider>
+        <Sider collapsed={ishidden} >
             <div className="Logo" >LOGO</div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                <Menu.Item key="1" icon={<UserOutlined />}>
-                    <Link to={'user'}>用户管理</Link>
-                </Menu.Item>
-                <Menu.Item key="2" icon={<UploadOutlined />}>
-                    <Link to={'send'}>发布管理</Link>
-                </Menu.Item>
-                <Menu.Item key="3" icon={<ContactsOutlined />}>
-                    <Link to={'power'}>权限管理</Link>
-                </Menu.Item>
-                <Menu.Item key="4" icon={<ContainerOutlined />}>
-                    <Link to={'news'}>新闻管理</Link>
-                </Menu.Item>
-                <Menu.Item key="5" icon={<AuditOutlined />}>
-                    <Link to={'examine'}>审核管理</Link>
-                </Menu.Item>
-                <Menu.Item key="6" icon={<GithubOutlined />}>
-                    <Link to={'zs'}>ZhangSen</Link>
-                </Menu.Item>
-                <Menu.Item key="7" icon={<RollbackOutlined />}>
-                    <Link to={''}>回到首页</Link>
-                </Menu.Item>
-
-
-
-
-
+                {renderMenu(Menus)}
             </Menu>
         </Sider>
     );

@@ -3,14 +3,23 @@ import { Layout, Dropdown, Menu, Avatar } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    UserOutlined,
 } from '@ant-design/icons';
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { sidehidden } from "../../Store";
 import style from './index.module.scss'
 const { Header } = Layout;
 const Topbar = () => {
     const [open, setopen] = useState(false)
+    const [hidden,sethidden] = useRecoilState(sidehidden)
+    const navigate = useNavigate()
     const changesider = () => {
         setopen(!open)
+        sethidden(!hidden)
+    }
+    const exitlogin = () => {
+        localStorage.clear("token")
+        navigate('/')
     }
     const menu = (
         <Menu>
@@ -23,7 +32,7 @@ const Topbar = () => {
             <Menu.Item disabled>
                 更新版本
             </Menu.Item>
-            <Menu.Item danger>退出</Menu.Item>
+            <Menu.Item danger onClick={exitlogin}>退出</Menu.Item>
         </Menu>
     );
     return (
